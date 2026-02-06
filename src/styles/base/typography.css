@@ -1,0 +1,12 @@
+@layer components {
+  .heading {
+    @apply font-bartle text-alpha-100 tracking-wide text-2xl sm:text-4xl md:text-6xl
+           font-semibold leading-tight capitalize;
+  }
+  .section-title { @apply uppercase font-normal tracking-tighter lg:tracking-tight text-sm md:text-base lg:text-xl; }
+  .subtitle { @apply capitalize font-light text-base; }
+  .paragraph { @apply text-alpha-200 font-light leading-relaxed text-base md:text-lg; }
+  .section-label { @apply text-xs font-light uppercase text-alpha-700; }
+  .credit-label { @apply font-normal text-base uppercase; }
+  .emphasis-text { @apply font-light text-base leading-normal text-alpha-100; }
+}

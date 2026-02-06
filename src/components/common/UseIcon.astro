@@ -1,0 +1,14 @@
+---
+import type { IconName } from "@type/types";
+
+interface Props {
+  name: IconName;
+  class?: string;
+}
+
+const { name, class: className = "" } = Astro.props;
+---
+
+<svg class:list={className} aria-hidden="true">
+  <use href={`/icons.svg#icon-${name}`}></use>
+</svg>

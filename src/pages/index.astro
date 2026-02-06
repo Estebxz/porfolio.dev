@@ -1,0 +1,33 @@
+---
+import Layout from "@base/Layout.astro";
+
+import Footer from "@shell/Footer.astro";
+import Box from "@common/Box.astro";
+import SocialLink from "@shell/SocialLink.astro";
+import List from "@project/List.astro";
+
+import GetCopyword from "@svelte/GetCopyword.svelte";
+---
+
+<Layout
+  title="Pagina de incio — Joan"
+  description="Colección de proyectos y experimentos en desarrollo web. Interfaces modernas, arquitectura frontend y soluciones orientadas a producto."
+>
+  <main>
+    <Box id="proyectos" class="mt-4 sm:mt-6 md:mt-8">
+      <List />
+    </Box>
+
+    <Box id="contacto" class="mt-16 mb-12 sm:mt-20 sm:mb-16 md:mt-24 md:mb-20">
+      <div
+        class="mx-auto flex flex-col items-center justify-center gap-6 sm:gap-8 md:gap-10"
+      >
+        <GetCopyword text="este.mendxz@gmail.com" client:visible />
+        <SocialLink />
+      </div>
+    </Box>
+  </main>
+  <div class="flex items-center justify-center py-4 sm:py-6">
+    <Footer />
+  </div>
+</Layout>

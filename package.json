@@ -1,0 +1,31 @@
+{
+  "name": "porfolio.dev",
+  "author": { "name": "Joan Mendez" },
+  "description": "Sitio web porfolio",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "lint": "eslint .",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/svelte": "7.2.5",
+    "@supabase/supabase-js": "2.94.1",
+    "@tailwindcss/vite": "4.1.18",
+    "astro": "5.17.1",
+    "svelte": "5.49.2",
+    "tailwindcss": "4.1.18"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "8.54.0",
+    "eslint": "9.39.2",
+    "eslint-plugin-astro": "1.5.0",
+    "prettier": "3.8.1",
+    "prettier-plugin-astro": "0.14.1",
+    "prettier-plugin-tailwindcss": "0.7.2",
+    "typescript": "5.9.3"
+  }
+}

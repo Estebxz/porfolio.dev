@@ -1,0 +1,19 @@
+@layer components {
+  .nav-base {
+    @apply text-alpha-700 hover:border-alpha-100 hover:text-alpha-100 relative block border-b-2 border-transparent px-4 py-2 text-base capitalize;
+  }
+
+  .mobile-menu-list {
+    @apply bg-primary-800 border-alpha-800/50 text-alpha-200 flex min-w-48 flex-col gap-2 overflow-hidden rounded border py-3;
+  }
+  .pagination-nav {
+    @apply flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5;
+  }
+
+  .nav-item {
+    @apply flex w-full items-center justify-between gap-4;
+  }
+  .underline-animated {
+    @apply text-alpha-200 hover:text-alpha-100 relative text-base font-medium transition-colors duration-300 after:absolute after:-bottom-px after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform hover:after:scale-x-100;
+  }
+}

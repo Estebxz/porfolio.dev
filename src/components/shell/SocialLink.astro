@@ -1,0 +1,50 @@
+---
+import Button from "@common/Button.astro";
+import UseIcon from "@common/UseIcon.astro";
+
+import { getSocialPlatform } from "@constants/social";
+
+const SOCIAL = await getSocialPlatform();
+---
+
+<nav
+  class="mx-auto w-full max-w-2xl px-4 sm:px-6"
+  aria-label="enlaces sociales"
+>
+  <ul
+    class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4"
+  >
+    {
+      SOCIAL.map(({ title, url, label,  color, icon }) => (
+        <li class="w-auto">
+          <Button
+            href={url}
+            ariaLabel={label}
+            title={label}
+            target="_blank"
+            rel="noopener noreferrer"
+            class:list={[
+              "border",
+              "border-alpha-200",
+              color,
+              "transition-all",
+              "duration-200",
+              "text-sm",
+              "sm:text-base",
+            ]}
+          >
+            {icon && (
+              <UseIcon
+                name={icon}
+                class="mb-0.5 h-4 w-4 shrink-0 sm:mb-1"
+                aria-hidden="true"
+                slot="after"
+              />
+            )}
+            {title}
+          </Button>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

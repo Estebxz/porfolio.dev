@@ -1,0 +1,140 @@
+---
+import Layout from "@base/Layout.astro";
+import Navegation from "@project/Navegation.astro";
+import Button from "@common/Button.astro";
+import UseIcon from "@common/UseIcon.astro";
+
+import { Image } from "astro:assets";
+import { getItems } from "@constants/project";
+import type { ProjectActions } from "@type/types";
+
+export async function getStaticPaths() {
+  const items = await getItems();
+
+  return items.map((item, index) => ({
+    params: { slug: item.slug },
+    props: {
+      item,
+      index,
+      items,
+    },
+  }));
+}
+
+const { slug } = Astro.params;
+const { item, index, items } = Astro.props;
+
+if (!item) {
+  return Astro.redirect("/404");
+}
+
+const {
+  title,
+  description,
+  logomark,
+  picture,
+  site_url,
+  repo_url,
+  page_name,
+  page_description,
+  background,
+} = item;
+
+const PROJECT_ACTIONS: ProjectActions[] = [
+  site_url && {
+    url: site_url,
+    label: "Abrir sitio web",
+    tooltip: "Ver el proyecto en acción",
+    icon: "arrow-up-right-from-square",
+    color: "hover:border-x-white",
+  },
+  repo_url && {
+    url: repo_url,
+    label: "Ver repositorio",
+    tooltip: "Espiar el código fuente",
+    icon: "github",
+    color: "hover:border-x-purple-800",
+  },
+].filter(Boolean) as ProjectActions[];
+
+const prevProject = index > 0 ? items[index - 1] : null;
+const nextProject = index < items.length - 1 ? items[index + 1] : null;
+---
+
+<Layout title={page_name} description={page_description}>
+  <main class="container mx-auto px-10 py-12 md:px-46 md:py-20">
+    <section class="grid min-h-150 grid-cols-1 items-start gap-10 md:gap-20 lg:min-h-130 lg:grid-cols-2">
+      <div class="flex max-w-xl flex-col gap-4">
+        <Image
+          src={logomark}
+          alt="Imagen logo"
+          width="600"
+          height="600"
+          loading="eager"
+          decoding="async"
+          transition:name={`title-${slug}`}
+        />
+        <h1 class="section-title">Descrición</h1>
+        <p class="paragraph">{description}</p>
+      </div>
+
+      <!-- columna derecha -->
+      <div class="relative">
+        <div aria-hidden="true">
+          <Image
+            src={background}
+            alt=""
+            width={600}
+            height={600}
+            class="glow"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        <figure class="card z-10">
+          <Image
+            src={picture}
+            alt={`Vista previa de ${title}`}
+            width="1200"
+            height="900"
+            loading="eager"
+            decoding="async"
+          />
+          <figcaption class="ui-actions">
+            <nav aria-label="Navegacion de los proyectos">
+              <ul class="flex gap-3" role="list">
+                {
+                  PROJECT_ACTIONS.map(
+                    ({ url, label, tooltip, icon, color }) => (
+                      <li>
+                        <Button
+                          href={url}
+                          title={tooltip}
+                          ariaLabel={label}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          class:list={[
+                            "border",
+                            "border-alpha-200",
+                            color,
+                            "transition-all",
+                            "duration-200",
+                          ]}
+                        >
+                          {icon && <UseIcon name={icon} class="icon" />}
+                        </Button>
+                      </li>
+                    ),
+                  )
+                }
+              </ul>
+            </nav>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+    <div class="mt-18 lg:mt-0">
+      <Navegation prev={prevProject} next={nextProject} basePath="/projects" />
+    </div>
+  </main>
+</Layout>

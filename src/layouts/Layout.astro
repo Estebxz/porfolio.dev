@@ -1,0 +1,44 @@
+---
+import "@style/global.css";
+import Header from "@shell/Header.astro";
+
+import { ClientRouter } from "astro:transitions";
+
+interface Props {
+  readonly title: string;
+  readonly description: string;
+}
+
+const { title, description }: Props = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/og.jpg" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Porfolio.dev" />
+    <ClientRouter />
+  </head>
+  <body class="layout">
+    <Header />
+    <slot />
+  </body>
+</html>
+
+<style>
+  .layout {
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
+  }
+</style>

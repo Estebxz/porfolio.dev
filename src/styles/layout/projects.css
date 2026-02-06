@@ -1,0 +1,9 @@
+@layer components {
+  .projects-list {
+    @apply flex flex-col;
+    gap: clamp(1rem, 3dvh, 2rem);
+  }
+  .project-item {
+    @apply leading-none my-2.5 sm:my-1 max-w-full;
+  }
+}

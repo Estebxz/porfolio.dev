@@ -1,0 +1,55 @@
+---
+import Button from "@common/Button.astro";
+import UseIcon from "@common/UseIcon.astro";
+import type { ProjectNavegation } from "@type/types";
+
+interface Props {
+  prev?: ProjectNavegation | null;
+  next?: ProjectNavegation | null;
+  basePath: string;
+}
+
+const { prev, next, basePath } = Astro.props;
+---
+
+<nav aria-label="Navegacion entre proyectos" class="pagination-nav">
+  {
+    prev ? (
+      <Button
+        href={`${basePath}/${prev?.slug}`}
+        rel="noopener noreferrer"
+        target="_self"
+        class="ui-action-link"
+      >
+        <section class="nav-item">
+          <UseIcon name={"vector"} slot="before" class="icon" />
+          <div class="flex flex-col">
+            <span class="section-label">Proyecto anterior</span>
+            <span class="subtitle">{prev?.title}</span>
+          </div>
+        </section>
+      </Button>
+    ) : null
+  }
+
+  <span class="separator" aria-hidden="true">•</span>
+
+  {
+    next ? (
+      <Button
+        href={`${basePath}/${next?.slug}`}
+        rel="noopener noreferrer"
+        target="_self"
+        class="ui-action-link"
+      >
+        <section class="nav-item">
+          <div class="flex flex-col">
+            <span class="section-label">Siguiente proyecto</span>
+            <span class="subtitle">{next?.title}</span>
+          </div>
+          <UseIcon name={"vector"} slot="after" class="icon rotate-y-180" />
+        </section>
+      </Button>
+    ) : null
+  }
+</nav>

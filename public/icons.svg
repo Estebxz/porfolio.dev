@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+
+  <!-- Arrow down -->
+  <symbol id="icon-arrow-down" viewBox="0 0 11 11">
+    <path
+      d="M3 5.5L5.5 8M5.5 8L8 5.5M5.5 8V0.5M0.5 10.5H10.5"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </symbol>
+
+  <!-- Arrow up right from square -->
+  <symbol id="icon-arrow-up-right-from-square" viewBox="0 0 24 24">
+    <path
+      d="m20 4-8 8m8-8v4.5M20 4h-4.5m3.5 8.5v4.3
+         c0 1.12 0 1.68-.218 2.108a2 2 0 0 1-.874.874
+         C17.48 20 16.92 20 15.8 20H7.2
+         c-1.12 0-1.68 0-2.108-.218a2 2 0 0 1-.874-.874
+         C4 18.48 4 17.92 4 16.8V8.2
+         c0-1.12 0-1.68.218-2.108a2 2 0 0 1 .874-.874
+         C5.52 5 6.08 5 7.2 5h4.3"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </symbol>
+
+  <!-- Arrow up right -->
+  <symbol id="icon-arrow-up-right" viewBox="0 0 24 24">
+    <path
+      d="M7 17 17 7m0 0H8m9 0v9"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </symbol>
+
+  <!-- GitHub -->
+  <symbol id="icon-github" viewBox="0 0 24 24">
+    <path
+      d="M12 .53a11.76 11.76 0 0 0-3.72 22.917
+         c.589.103.81-.25.81-.558
+         0-.28-.015-1.206-.015-2.19
+         -2.955.543-3.72-.72-3.955-1.382
+         a4.3 4.3 0 0 0-1.205-1.661
+         c-.412-.22-1-.765-.015-.78
+         a2.35 2.35 0 0 1 1.808 1.206
+         a2.513 2.513 0 0 0 3.425.97
+         a2.48 2.48 0 0 1 .75-1.573
+         c-2.616-.294-5.35-1.308-5.35-5.806
+         a4.58 4.58 0 0 1 1.205-3.16
+         a4.23 4.23 0 0 1 .117-3.117
+         S6.84 5.087 9.09 6.6
+         a11.1 11.1 0 0 1 5.88 0
+         c2.25-1.529 3.234-1.205 3.234-1.205
+         .435.986.478 2.1.118 3.116
+         a4.55 4.55 0 0 1 1.205 3.16
+         c0 4.514-2.749 5.513-5.365 5.807
+         a2.8 2.8 0 0 1 .794 2.176
+         c0 1.573-.015 2.837-.015 3.234
+         0 .308.22.676.808.558
+         A11.766 11.766 0 0 0 12 .53"
+      fill="currentColor"
+    />
+  </symbol>
+
+  <!-- Hamburger -->
+  <symbol id="icon-hamburger" viewBox="0 0 17 14">
+    <path
+      d="M1 1h15M1 7h15M1 13h15"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </symbol>
+
+  <!-- Vector icon -->
+  <symbol id="icon-vector" viewBox="0 0 30 24">
+    <path
+      d="M9.375 0H7.5L0 7.385l7.5 7.384h1.875V9.231h11.25
+         c3.107 0 5.625 2.48 5.625 5.538
+         0 3.06-2.518 5.539-5.625 5.539H7.5V24h13.125
+         C25.803 24 30 19.867 30 14.77
+         c0-5.099-4.197-9.232-9.375-9.232H9.375z"
+      fill="currentColor"
+    />
+  </symbol>
+
+  <!-- Donut icon -->
+  <symbol id="icon-donut" viewBox="0 0 92 92">
+    <path
+    d="M46 59.696c7.564 0 13.696-6.132 13.696-13.696S53.564 32.304 46 32.304 32.304 38.436 32.304 46 38.436 59.696 46 59.696ZM1 50.565s9.715 9.13 17.657 9.13c5.35 0 11.504-4.143 14.952-6.847"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    />
+    <path
+    d="M54.478 56.151c2.189 1.896 5.05 3.545 8.384 3.545 7.846 0 7.846-9.13 15.691-9.13 5.005 0 8.945 3.714 11.143 6.404"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    />
+    <path
+    d="m57.087 23.174 6.522-9.13m14.782 9.565L81 19.696m-35.652-5.652-3.913-5.218m-2.609 14.348-6.522 1.304m33.913 7.826 1.305 6.522m16.956-1.304-6.522 6.522M23.609 14.478l-3.913-3.913m2.174 21.739-2.61-5.217M16.652 49.26l3.913-6.52M7.522 37.522v-5.218M23.5 84.98A44.8 44.8 0 0 0 46 91c24.853 0 45-20.147 45-45S70.853 1 46 1 1 21.147 1 46c0 8.196 2.191 15.88 6.02 22.5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    />
+  </symbol>
+</svg>

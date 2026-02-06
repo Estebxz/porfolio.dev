@@ -1,0 +1,91 @@
+---
+import UseIcon from "@common/UseIcon.astro";
+import { MAIN } from "@constants/navigation";
+
+import Logo from "@asset/logo.svg";
+---
+
+<header class="header sticky top-0 z-50" id="navbar" transition:persist>
+  <div class="content-view relative">
+    <a href="/" aria-label="Inicio">
+      <Logo
+        width="40"
+        height="40"
+        class="-rotate-6 transition-transform duration-300 ease-out hover:rotate-0"
+      />
+    </a>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+      aria-label="Abrir menú"
+      class="text-alpha-200 inline-flex size-10 items-center justify-center transition-transform md:hidden"
+    >
+      <span class="sr-only" id="menu-label">Abrir menú</span>
+      <UseIcon name="hamburger" class="icon" />
+    </button>
+
+    <!-- Menú desktop -->
+    <nav class="hidden md:block" aria-label="Menú principal">
+      <ul class="flex flex-row gap-4" role="list">
+        {
+          MAIN.map(({ url, title, label }) => (
+            <li>
+              <a
+                href={url}
+                title={label}
+                aria-label={label}
+                class="nav-base hover:border-alpha-100 hover:text-alpha-100 uppercase transition-colors duration-300"
+              >
+                {title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <!-- Menú móvil -->
+    <nav
+      id="mobile-menu"
+      class="mobile-menu-list pointer-events-none absolute top-full right-0 mt-2 mr-4 opacity-0 transition-all duration-300 md:hidden"
+      aria-label="Menú móvil"
+    >
+      <ul class="flex flex-col" role="list">
+        {
+          MAIN.map(({ url, title, label }) => (
+            <li>
+              <a href={url} title={label} aria-label={label} class="nav-base">
+                {title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  header {
+    background: transparent;
+    animation: ui-scroll 0.3s linear both;
+    animation-timeline: scroll();
+    animation-range: 0 250px;
+  }
+
+  @keyframes ui-scroll {
+    0% {
+      backdrop-filter: blur(0px);
+      background: transparent;
+    }
+
+    100% {
+      backdrop-filter: blur(10px);
+      background: var(--color-primary-900/60);
+      padding-bottom: var(--spacing-6);
+    }
+  }
+</style>

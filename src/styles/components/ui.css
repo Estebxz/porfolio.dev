@@ -1,0 +1,6 @@
+@layer components {
+  .ui-actions { @apply absolute bottom-4 right-4 flex gap-4; }
+  .ui-action-link { @apply z-10 rounded-lg border border-alpha-200 hover:border-x-white transition-all; }
+  .icon { @apply w-6 h-6 shrink-0; }
+  .separator { @apply flex items-center justify-center text-sm md:hidden; }
+}

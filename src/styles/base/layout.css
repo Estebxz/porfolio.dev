@@ -1,0 +1,13 @@
+@layer components {
+  .content-wrapper {
+    @apply mx-auto w-auto max-w-7xl overflow-x-hidden px-[clamp(1rem,2vw,2rem)] py-[clamp(2rem,6vw,4rem)];
+  }
+
+  .centered-view {
+    @apply flex flex-col items-center justify-center text-center mx-auto max-w-xs
+           sm:max-w-md md:max-w-lg gap-6;
+  }
+  .content-view {
+    @apply mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4 md:px-8 lg:px-12;
+  }
+}

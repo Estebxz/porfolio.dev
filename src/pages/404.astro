@@ -1,0 +1,45 @@
+---
+import Layout from "@base/Layout.astro";
+import Button from "@common/Button.astro";
+
+import UseIcon from "@common/UseIcon.astro";
+---
+
+<Layout
+  title="Ups… aquí no hay nada — 404"
+  description="No encontramos esta página, pero aún tienes muchas cosas por descubrir en nuestro sitio."
+>
+  <main class="centered-view">
+    <div class="error-visual" aria-hidden="true">
+      <span class="error-digit" title="mmm... donuts 🍩">4</span>
+      <UseIcon
+        name="donut"
+        class="text-alpha-100 h-24 w-24 transition-transform duration-1000 hover:rotate-360 md:h-32 md:w-32"
+      />
+      <span class="error-digit" title="mmm... donuts 🍩">4</span>
+    </div>
+
+    <h1 class="heading">pagina no encontrada</h1>
+
+    <section class="max-w-sm sm:max-w-md">
+      <p class="paragraph">
+        Lo siento, la página que estás buscando no existe o ha sido removida.
+        Sigue explorando nuestro sitio.
+      </p>
+    </section>
+    <div
+      class="flex flex-col items-center justify-center gap-4 text-nowrap sm:flex-row"
+    >
+      <Button
+        href="/"
+        rel="noopener noreferrer"
+        target="_self"
+        class="ui-action-link"
+      >
+        Volver al inicio
+      </Button>
+      <span class="separator">•</span>
+      <span class="emphasis-text"> Hora de hacer alguna otra cosa </span>
+    </div>
+  </main>
+</Layout>

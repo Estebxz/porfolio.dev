@@ -1,0 +1,9 @@
+dist
+node_modules
+.astro
+build
+package-lock.json
+.env
+.env.production
+*.min.js
+*.min.css
