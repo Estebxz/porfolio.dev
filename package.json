@@ -1,6 +1,8 @@
 {
   "name": "porfolio.dev",
-  "author": { "name": "Joan Mendez" },
+  "author": {
+    "name": "Joan Mendez"
+  },
   "description": "Sitio web porfolio",
   "type": "module",
   "version": "0.0.1",
@@ -12,6 +14,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/netlify": "6.6.4",
     "@astrojs/svelte": "7.2.5",
     "@supabase/supabase-js": "2.94.1",
     "@tailwindcss/vite": "4.1.18",
