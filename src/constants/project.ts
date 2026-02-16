@@ -6,6 +6,7 @@ const BACKGROUNDS: Record<string, string> = {
   "codepicture": "/images/code.webp",
   "classify-ai": "/images/classify.webp",
   "data_insights_dyret": "/images/insights.webp",
+  "guardao": "/images/guardao.webp"
 };
 
 export async function getItems(): Promise<readonly ProjectTypes[]> {
