@@ -1,8 +1,8 @@
-import type { BaseTypes, ProjectActions } from "@type/types";
+import type { BaseTypes } from "@type/types";
 
 export const MAIN: BaseTypes[] = [
   {
-    title: "Dashboard",
+    title: "Proyectos",
     url: "/#proyectos",
     label: "Navega hacia los proyectos",
   },
@@ -12,4 +12,3 @@ export const MAIN: BaseTypes[] = [
     label: "Ve a la sección de contacto",
   },
 ] as const;
-
