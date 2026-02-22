@@ -2,21 +2,49 @@
 import { getItems } from "@constants/project";
 
 const projects = await getItems();
+const statusParam = Astro.url.searchParams.get("status");
+const status = statusParam === "done" || statusParam === "in_progress" ? statusParam : "all";
+
+const filters = [
+  { key: "all", label: "Todos", href: "/#project" },
+  { key: "in_progress", label: "En progreso", href: "/?status=in_progress#project" },
+  { key: "done", label: "Terminado", href: "/?status=done#project" },
+];
 ---
 
 <div class="content-wrapper">
   <h1 class="section-title">Proyectos</h1>
 
+  <nav class="projects-filters" aria-label="Filtrar proyectos">
+    <ul class="projects-filters__list" role="list">
+      {
+        filters.map(({ key, label, href }) => (
+          <li>
+            <a
+              class="projects-filters__link"
+              href={href}
+              aria-current={status === key ? "page" : undefined}
+              data-filter={key}
+            >
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
   <section aria-labelledby="projects-title">
     <ul class="projects-list" role="list">
       {
-        projects.map(({ slug, title }) => (
+        projects.map(({ slug, title, status }) => (
           <li class="project-item">
             <a
               class="hollow-text"
               href={`/projects/${slug}`}
               aria-label={`Ver proyecto ${title}`}
               transition:name={`title-${slug}`}
+              data-status={status}
             >
               {title}
             </a>
@@ -28,6 +56,56 @@ const projects = await getItems();
 </div>
 
 <style>
+  .projects-filters {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .projects-filters__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .projects-filters__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+
+    color: var(--color-alpha-100);
+    background: var(--color-primary-900);
+    border: 1px solid var(--color-border-btn);
+    border-radius: 0.4rem;
+
+    padding: 0.45rem 0.85rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: normal;
+
+    font-weight: 400;
+    font-size: 0.85rem;
+    line-height: 1;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .projects-filters__link:hover {
+    background: var(--color-primary-700);
+    transform: translateY(-1px);
+  }
+
+  .projects-filters__link[aria-current="page"] {
+    border-color: var(--color-emphasis);
+    background: oklch(70.7% 0.165 254.624/10%);
+    color: var(--color-emphasis);
+    transform: translateY(0);
+  }
+
   .hollow-text {
     font-family: var(--font-bartle);
     text-transform: uppercase;
@@ -120,3 +198,71 @@ const projects = await getItems();
     }
   }
 </style>
+
+<script>
+  const VALID = new Set(["all", "done", "in_progress"]);
+  const STORAGE_KEY = "projects.status";
+
+  function getStatusFromUrl() {
+    const url = new URL(window.location.href);
+    const s = url.searchParams.get("status");
+    if (s && VALID.has(s)) return s;
+
+    const stored = sessionStorage.getItem(STORAGE_KEY);
+    return stored && VALID.has(stored) ? stored : "all";
+  }
+
+  function setUrl(nextStatus: string) {
+    const status = VALID.has(nextStatus) ? nextStatus : "all";
+    const url = new URL(window.location.href);
+
+    if (status === "all") url.searchParams.delete("status");
+    else url.searchParams.set("status", status);
+
+    url.hash = "project";
+    history.replaceState({}, "", url);
+  }
+
+  function applyFilter(nextStatus: string) {
+    const status = VALID.has(nextStatus) ? nextStatus : "all";
+
+    if (status === "all") sessionStorage.removeItem(STORAGE_KEY);
+    else sessionStorage.setItem(STORAGE_KEY, status);
+
+    document
+      .querySelectorAll<HTMLAnchorElement>("a[data-filter]")
+      .forEach((a) => {
+        if (a.getAttribute("data-filter") === status)
+          a.setAttribute("aria-current", "page");
+        else a.removeAttribute("aria-current");
+      });
+
+    document
+      .querySelectorAll<HTMLAnchorElement>("a[data-status]")
+      .forEach((a) => {
+        const itemStatus = a.getAttribute("data-status");
+        const li = a.closest("li");
+        if (!li) return;
+        li.hidden = status === "all" ? false : itemStatus !== status;
+      });
+  }
+
+  applyFilter(getStatusFromUrl());
+
+  document
+    .querySelectorAll<HTMLAnchorElement>("a[data-filter]")
+    .forEach((a) => {
+      a.addEventListener("click", (e) => {
+        const key = a.getAttribute("data-filter") ?? "all";
+        if (!VALID.has(key)) return;
+        e.preventDefault();
+        setUrl(key);
+        applyFilter(key);
+        document.getElementById("project")?.scrollIntoView();
+      });
+    });
+
+  window.addEventListener("popstate", () => {
+    applyFilter(getStatusFromUrl());
+  });
+</script>

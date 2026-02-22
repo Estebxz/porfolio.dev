@@ -9,11 +9,20 @@ const BACKGROUNDS: Record<string, string> = {
   "guardao": "/images/guardao.webp"
 };
 
+const STATUS: Record<string, ProjectTypes["status"]> = {
+  "spotify_clone": "in_progress",
+  "codepicture": "in_progress",
+  "classify-ai": "done",
+  "data_insights_dyret": "done",
+  "guardao": "in_progress"
+}
+
 export async function getItems(): Promise<readonly ProjectTypes[]> {
   const projects = await getProjects();
 
   return projects.map((p) => ({
     ...p,
     background: BACKGROUNDS[p.slug],
+    status: STATUS[p.slug],
   }));
 }

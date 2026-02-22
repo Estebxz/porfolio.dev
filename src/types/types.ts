@@ -22,6 +22,7 @@ export interface ProjectTypes {
   page_name: string;
   page_description: string;
   background: string;
+  status: "done" | "in_progress";
 }
 
 export interface ProjectActions extends Platform {

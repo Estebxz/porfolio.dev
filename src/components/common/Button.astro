@@ -1,14 +1,21 @@
 ---
 interface Props {
-    href: string | null | undefined;
-    title?: string;
-    ariaLabel?: string;
-    rel: string;
-    target: "_blank" | "_self" | "_parent";
-    class?: string | string[];
+  href: string | null | undefined;
+  title?: string;
+  ariaLabel?: string;
+  rel: string;
+  target: "_blank" | "_self" | "_parent";
+  class?: string | string[];
 }
 
-const { href: url = '', title, ariaLabel, rel, target, class: className = '' } = Astro.props;
+const {
+  href: url = "",
+  title,
+  ariaLabel,
+  rel,
+  target,
+  class: className = "",
+} = Astro.props;
 ---
 
 <a
@@ -43,15 +50,17 @@ const { href: url = '', title, ariaLabel, rel, target, class: className = '' } =
     color: var(--color-alpha-100);
     border-radius: 0.4rem;
 
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    transition:
+      background-color 0.2s ease,
+      transform 0.1s ease;
     white-space: normal;
   }
-  
+
   .item-button:hover {
     background: var(--color-primary-700);
     transform: translateY(-1px);
   }
-  
+
   .item-button:active {
     transform: translateY(0);
   }
@@ -63,5 +72,4 @@ const { href: url = '', title, ariaLabel, rel, target, class: className = '' } =
       white-space: nowrap;
     }
   }
-
 </style>
