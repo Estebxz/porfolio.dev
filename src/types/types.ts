@@ -37,6 +37,7 @@ export type Platform = {
 };
 
 export type ProjectNavegation = Pick<ProjectTypes, "slug" | "title">;
+export type BaseProjectTypes = Omit<ProjectTypes, "background" | "status">;
 
 export type IconName =
   | "arrow-down"

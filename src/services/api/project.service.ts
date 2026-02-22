@@ -1,12 +1,13 @@
 import { supabase } from "@lib/supabase";
+import type { BaseProjectTypes } from "@type/types";
 
-let cachedProjects: unknown[] | null = null;
+let cachedProjects: BaseProjectTypes[] | null;
 let cachedAtMs = 0;
-let inFlight: Promise<unknown[]> | null = null;
+let inFlight: Promise<BaseProjectTypes[]> | null;
 
 const CACHE_TTL_MS = 5 * 60 * 1000;
 
-export async function getProjects() {
+export async function getProjects(): Promise<BaseProjectTypes[]> {
   const now = Date.now();
   if (cachedProjects && now - cachedAtMs < CACHE_TTL_MS) return cachedProjects;
 
@@ -31,7 +32,7 @@ export async function getProjects() {
       throw new Error("Error fetching projects");
     }
 
-    const result = (data ?? []) as unknown[];
+    const result = (data ?? []) as BaseProjectTypes[];
     cachedProjects = result;
     cachedAtMs = Date.now();
     return result;
