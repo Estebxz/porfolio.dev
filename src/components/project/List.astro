@@ -208,6 +208,8 @@ const filters = [
     const s = url.searchParams.get("status");
     if (s && VALID.has(s)) return s;
 
+    if (url.hash === "#project") return "all";
+
     const stored = sessionStorage.getItem(STORAGE_KEY);
     return stored && VALID.has(stored) ? stored : "all";
   }
@@ -249,20 +251,25 @@ const filters = [
 
   applyFilter(getStatusFromUrl());
 
-  document
-    .querySelectorAll<HTMLAnchorElement>("a[data-filter]")
-    .forEach((a) => {
-      a.addEventListener("click", (e) => {
-        const key = a.getAttribute("data-filter") ?? "all";
-        if (!VALID.has(key)) return;
-        e.preventDefault();
-        setUrl(key);
-        applyFilter(key);
-        document.getElementById("project")?.scrollIntoView();
-      });
-    });
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement | null;
+    const a = target?.closest("a[data-filter]") as HTMLAnchorElement | null;
+    if (!a) return;
+
+    const key = a.getAttribute("data-filter") ?? "all";
+    if (!VALID.has(key)) return;
+
+    e.preventDefault();
+    setUrl(key);
+    applyFilter(key);
+    document.getElementById("project")?.scrollIntoView();
+  });
 
   window.addEventListener("popstate", () => {
+    applyFilter(getStatusFromUrl());
+  });
+
+  window.addEventListener("hashchange", () => {
     applyFilter(getStatusFromUrl());
   });
 </script>

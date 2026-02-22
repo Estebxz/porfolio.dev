@@ -29,7 +29,6 @@
   --color-border-btn: oklch(1 0 0 / 16%);
 
   --font-inter: "Inter", sistem-ui, sans-serif;
-  --font-bartle: "BBH-Bartle", sans-serif;
 }
 
 @theme {
@@ -48,7 +47,6 @@
   --color-border-btn: var(--color-border-btn);
 
   --font-inter: var(--font-inter);
-  --font-bartle: var(--font-bartle);
 }
 
 body {
