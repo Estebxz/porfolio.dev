@@ -6,11 +6,12 @@
 <a href="https://joanmm.netlify.app/" target="_blank" rel="noopener noreferrer">
  
 ![Vista previa](/public/repo-image.webp)
+
+</a>
 ![Astro](https://img.shields.io/badge/astro-%232C2052.svg?style=for-the-badge&logo=astro&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-%23235A97.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![Svelte](https://img.shields.io/badge/svelte-%23f1413d.svg?style=for-the-badge&logo=svelte&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-%231B653A?style=for-the-badge&logo=supabase&logoColor=white)
-</a>
 </div>
  
 <br>
