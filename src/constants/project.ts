@@ -2,19 +2,19 @@ import type { ProjectTypes } from "@type/types";
 import { getProjects } from "@api/project.service";
 
 const BACKGROUNDS: Record<string, string> = {
-  "spotify_clone": "/images/spotify.webp",
+  "data_insights_dyret": "/images/insights.webp",
   "codepicture": "/images/code.webp",
   "classify-ai": "/images/classify.webp",
-  "data_insights_dyret": "/images/insights.webp",
-  "guardao": "/images/guardao.webp"
+  "guardao": "/images/guardao.webp",
+  "colsof": "/images/colsof.webp"
 };
 
 const STATUS: Record<string, ProjectTypes["status"]> = {
-  "spotify_clone": "in_progress",
+  "data_insights_dyret": "done",
   "codepicture": "in_progress",
   "classify-ai": "done",
-  "data_insights_dyret": "done",
-  "guardao": "in_progress"
+  "guardao": "in_progress",
+  "colsof": "in_progress"
 }
 
 export async function getItems(): Promise<readonly ProjectTypes[]> {

@@ -3,16 +3,16 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@style/*": ["src/styles/*"],
-      "@component/*": ["src/components/*"],
-      "@common/*": ["src/components/common/*"],
-      "@base/*": ["src/layouts/*"],
       "@type/*": ["src/types/*"],
       "@constants/*": ["src/constants/*"],
-      "@shell/*": ["src/components/shell/*"],
+      "@lib/*": ["src/lib/*"],
+      "@style/*": ["src/styles/*"],
+      "@base/*": ["src/layouts/*"],
+      "@component/*": ["src/components/*"],
+      "@ui/*": ["src/components/ui/*"],
+      "@layout/*": ["src/components/layout/*"],
       "@project/*": ["src/components/project/*"],
       "@svelte/*": ["src/components/svelte/*"],
-      "@lib/*": ["src/lib/*"],
       "@api/*": ["src/services/api/*"],
       "@asset/*": ["src/assets/*"]
     }
