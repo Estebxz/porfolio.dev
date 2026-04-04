@@ -10,21 +10,6 @@ export interface SocialTypes extends Platform {
   readonly label: string;
 }
 
-export interface ProjectTypes {
-  id: number;
-  slug: string;
-  title: string;
-  description: string;
-  logomark: string;
-  picture: string;
-  site_url: string | null | undefined;
-  repo_url: string;
-  page_name: string;
-  page_description: string;
-  background: string;
-  status: "done" | "in_progress";
-}
-
 export interface ProjectActions extends Platform {
   url: string | null;
   label: string;
@@ -35,9 +20,6 @@ export type Platform = {
   color: string;
   icon?: IconName;
 };
-
-export type ProjectNavegation = Pick<ProjectTypes, "slug" | "title">;
-export type BaseProjectTypes = Omit<ProjectTypes, "background" | "status">;
 
 export type IconName =
   | "arrow-down"

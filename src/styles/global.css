@@ -24,11 +24,15 @@
   --color-alpha-600: oklch(0.683 0 0);
   --color-alpha-200: oklch(0.738 0 0);
   --color-alpha-100: oklch(0.8853 0 0);
-  --color-emphasis: oklch(0.5899 0.1716 255.42);
-  --color-steel-blue: oklch(0.588 0.0993 245.74);
+  --color-emphasis: oklch(0.4215 0.1649 307.56);
+  --color-success: oklch(0.4907 0.1461 145.93);  
+  --color-steel-purple: oklch(0.4926 0.1177 321.28);
+  --color-yellow: oklch(0.8928 0.1831 96.54);
   --color-border-btn: oklch(1 0 0 / 16%);
 
   --font-inter: "Inter", sistem-ui, sans-serif;
+  --font-bbh-bartle: "BBH-Bartle", sistem-ui, sans-serif;
+  --font-inder: "Inder", sistem-ui, sans-serif;
 }
 
 @theme {
@@ -43,10 +47,14 @@
   --color-alpha-200: var(--color-alpha-200);
   --color-alpha-100: var(--color-alpha-100);
   --color-emphasis: var(--color-emphasis);
-  --color-steel-blue: var(--color-steel-blue);
+  --color-success: var(--color-success);
+  --color-steel-purple: var(--color-steel-purple);
+  --color-yellow: var(--color-yellow);
   --color-border-btn: var(--color-border-btn);
 
   --font-inter: var(--font-inter);
+  --font-bbh-bartle: var(--font-bbh-bartle);
+  --font-inder: var(--font-inder);
 }
 
 body {

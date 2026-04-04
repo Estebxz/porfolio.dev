@@ -1,0 +1,100 @@
+---
+type StatItem = {
+  top: string;
+  bottom: string;
+};
+
+const items: StatItem[] = [
+  { top: "40+", bottom: "Repositorios" },
+  { top: "1+", bottom: "Año de Experiencia" },
+  { top: "BOG", bottom: "Colombia" },
+];
+---
+
+<div class="statsbar" role="list" aria-label="Resumen">
+  {
+    items.map((item, idx) => (
+      <div
+        class:list={[
+          "statsbar__item",
+          idx === 0 && "is-left",
+          idx === 1 && "is-middle",
+          idx === 2 && "is-right",
+        ]}
+        role="listitem"
+      >
+        <div class="statsbar__top">{item.top}</div>
+        <div class="statsbar__bottom">{item.bottom}</div>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .statsbar {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .statsbar__item {
+    position: relative;
+    flex: 1 1 0;
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-align: center;
+    color: var(--color-alpha-100);
+  }
+
+  .statsbar__item.is-left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .statsbar__item.is-right {
+    align-items: flex-end;
+    text-align: right;
+    color: var(--color-yellow);
+  }
+
+  .statsbar__item.is-middle::before,
+  .statsbar__item.is-middle::after {
+    content: "";
+    position: absolute;
+    top: 25%;
+    bottom: 25%;
+    width: 1px;
+    background: color-mix(in oklch, var(--color-alpha-100) 30%, transparent);
+  }
+
+  .statsbar__item.is-middle::before { left: 0; }
+  .statsbar__item.is-middle::after  { right: 0; }
+
+  .statsbar__top {
+    font-weight: 700;
+    font-size: 1.15rem;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .statsbar__bottom {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.4;
+  }
+
+  @media (max-width: 640px) {
+    .statsbar__item {
+      padding: 14px 12px;
+    }
+    .statsbar__top {
+      font-size: 1rem;
+    }
+  }
+</style>

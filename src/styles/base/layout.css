@@ -1,6 +1,6 @@
 @layer components {
   .content-wrapper {
-    @apply mx-auto w-auto max-w-7xl overflow-x-hidden px-[clamp(1rem,2vw,2rem)] ;
+    @apply mx-auto w-auto max-w-7xl overflow-x-hidden;
   }
 
   .centered-view {

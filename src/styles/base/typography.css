@@ -1,6 +1,6 @@
 @layer components {
   .heading {
-    font-family: var(--font-bartle);
+    font-family: var(--font-bbh-bartle);
     @apply text-alpha-100 text-2xl leading-tight font-semibold tracking-wide capitalize sm:text-4xl md:text-6xl;
   }
   .section-title { @apply text-sm font-normal tracking-tighter uppercase md:text-base lg:text-xl lg:tracking-tight; }

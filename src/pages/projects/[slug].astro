@@ -40,6 +40,16 @@ const {
   background,
 } = item;
 
+const layoutTitle = page_name ?? title;
+const layoutDescription = page_description ?? description ?? "";
+
+const logoSrc = logomark ?? picture;
+const previewSrc = picture ?? logomark;
+
+if (!logoSrc || !previewSrc) {
+  return Astro.redirect("/404");
+}
+
 const PROJECT_ACTIONS: ProjectActions[] = [
   site_url && {
     url: site_url,
@@ -61,14 +71,14 @@ const prevProject = index > 0 ? items[index - 1] : null;
 const nextProject = index < items.length - 1 ? items[index + 1] : null;
 ---
 
-<Layout title={page_name} description={page_description}>
+<Layout title={layoutTitle} description={layoutDescription}>
   <main class="container mx-auto px-10 py-12 md:px-46 md:py-20">
     <section
       class="grid min-h-150 grid-cols-1 items-start gap-10 md:gap-20 lg:min-h-130 lg:grid-cols-2"
     >
       <div class="flex max-w-xl flex-col gap-4">
         <Image
-          src={logomark}
+          src={logoSrc}
           alt="Imagen logo"
           width="600"
           height="600"
@@ -77,25 +87,28 @@ const nextProject = index < items.length - 1 ? items[index + 1] : null;
           transition:name={`title-${slug}`}
         />
         <h1 class="section-title">Descripción</h1>
-        <p class="paragraph">{description}</p>
+        {description ? <p class="paragraph">{description}</p> : null}
       </div>
 
-      <!-- columna derecha -->
       <div class="relative">
         <div aria-hidden="true">
-          <Image
-            src={background}
-            alt=""
-            width={600}
-            height={600}
-            class="glow"
-            loading="eager"
-            decoding="async"
-          />
+          {
+            background ? (
+              <Image
+                src={background}
+                alt=""
+                width={600}
+                height={600}
+                class="glow"
+                loading="eager"
+                decoding="async"
+              />
+            ) : null
+          }
         </div>
         <figure class="card z-10">
           <Image
-            src={picture}
+            src={previewSrc}
             alt={`Vista previa de ${title}`}
             width="1200"
             height="900"

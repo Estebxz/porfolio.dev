@@ -1,16 +1,14 @@
 ---
 import "@style/global.css";
 import Header from "@layout/Header.astro";
-
 import { ClientRouter } from "astro:transitions";
-import { Font } from "astro:assets";
 
 interface Props {
   readonly title: string;
   readonly description: string;
 }
 
-const { title, description }: Props = Astro.props;
+const { title, description } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -23,6 +21,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    <link
+      rel="preload"
+      href="/fonts/bbh-sans-bartle-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
@@ -38,22 +43,84 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:description" content="Portfolio de Joan Esteban Méndez - Desarrollo web frontend con React, Astro y TypeScript. Transformo ideas en aplicaciones web funcionales y atractivas." />
     <meta name="twitter:image" content="https://joanmm.app/og.jpg" />
 
-    <Font
-      cssVariable="--font-bartle"
-      preload={[{ subset: "latin", style: "normal" }, { weight: "400" }]}
-    />
     <ClientRouter />
   </head>
   <body class="layout">
-    <Header />
-    <slot />
+    <div class="layout-bg" aria-hidden="true">
+      <svg
+        class="layout-bg__svg"
+        width="1440"
+        height="676"
+        viewBox="0 0 1440 676"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect
+          x="-92"
+          y="-948"
+          width="1624"
+          height="1624"
+          rx="812"
+          fill="url(#a)"></rect>
+        <defs>
+          <radialGradient
+            id="a"
+            cx="0"
+            cy="0"
+            r="1"
+            gradientUnits="userSpaceOnUse"
+            gradientTransform="rotate(90 428 292) scale(812)"
+          >
+            <stop
+              offset=".522"
+              stop-color="var(--color-emphasis)"
+              stop-opacity="0"></stop>
+            <stop offset="1" stop-color="var(--color-emphasis)"></stop>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="layout-content">
+      <Header />
+      <slot />
+    </div>
   </body>
 </html>
 
 <style>
   .layout {
+    position: relative;
     display: grid;
     min-height: 100dvh;
     grid-template-rows: auto 1fr auto;
+    overflow-x: hidden;
+  }
+
+  .layout-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .layout-bg__svg {
+    position: absolute;
+    left: 50%;
+    top: -200px;
+    width: 100vw;
+    max-width: 1440px;
+    transform: translateX(-50%);
+    opacity: 0.9;
+    filter: blur(24px);
+  }
+
+  .layout-content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: 1 / -1;
   }
 </style>

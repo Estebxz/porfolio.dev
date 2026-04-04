@@ -1,4 +1,4 @@
-import { getAuthors } from "@api/author.service";
+import { getCollection } from "astro:content";
 import type { SocialTypes, Platform } from "@type/types";
 
 const CONFIG: Record<string, Platform> = {
@@ -18,13 +18,15 @@ const CONFIG: Record<string, Platform> = {
 };
 
 export async function getSocialPlatform(): Promise<readonly SocialTypes[]> {
-  const authors = await getAuthors();
-  const author = authors?.[0];
+  const entries = await getCollection("authors");
+  const author = entries?.[0]?.data as {
+    social_links?: { platform: string; url: string }[];
+  };
 
   if (!author?.social_links?.length) return [];
 
   return author.social_links.map(({ platform, url }) => {
-    const config = CONFIG[platform]
+    const config = CONFIG[platform];
 
     return {
       title: platform,
@@ -34,4 +36,3 @@ export async function getSocialPlatform(): Promise<readonly SocialTypes[]> {
     };
   });
 }
-

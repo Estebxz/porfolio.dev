@@ -5,7 +5,7 @@
 <strong><h1>Web oficial - joanmm.app</h1></strong>
 <a href="https://joanmm.netlify.app/" target="_blank" rel="noopener noreferrer">
  
-![Vista previa](/public/repo-image.webp)
+![Vista previa](/public/images/repo-image.webp)
 
 </a>
 

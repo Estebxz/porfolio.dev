@@ -1,7 +1,9 @@
 ---
 import Button from "@ui/Button.astro";
 import UseIcon from "@ui/UseIcon.astro";
-import type { ProjectNavegation } from "@type/types";
+import type { ProjectTypes } from "@type/schemas";
+
+type ProjectNavegation = Pick<ProjectTypes, "slug" | "title">;
 
 interface Props {
   prev?: ProjectNavegation | null;

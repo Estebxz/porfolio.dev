@@ -1,0 +1,180 @@
+---
+interface Props {
+  id?: string;
+  storageKey?: string;
+  minDurationMs?: number;
+  label?: string;
+}
+
+const {
+  id = "page-loader",
+  storageKey = "pageLoader.seen",
+  minDurationMs = 1200,
+  label = "Cargando página",
+}: Props = Astro.props;
+---
+
+<div
+  id={id}
+  class="page-loader"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-label={label}
+  tabindex="-1"
+>
+  <div class="page-loader__content">
+    <div class="page-loader__title">Cargando</div>
+    <div
+      class="page-loader__bar"
+      role="progressbar"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-label="Cargando contenido"
+      aria-busy="true"
+    >
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ id, storageKey, minDurationMs }}>
+  const getLoader = () => document.getElementById(id);
+  let previousFocus = null;
+
+  const hide = () => {
+    const el = getLoader();
+    if (!el) return;
+    el.setAttribute("aria-hidden", "true");
+    el.removeAttribute("tabindex");
+    document.documentElement.removeAttribute("data-loading");
+    if (previousFocus && typeof previousFocus.focus === "function") {
+      previousFocus.focus();
+    }
+    previousFocus = null;
+  };
+
+  const show = () => {
+    const el = getLoader();
+    if (!el) return;
+    el.setAttribute("aria-hidden", "false");
+    el.setAttribute("tabindex", "-1");
+    previousFocus = document.activeElement;
+    el.focus();
+    document.documentElement.setAttribute("data-loading", "true");
+  };
+
+  const waitForWindowLoad = () =>
+    new Promise((resolve) => {
+      if (document.readyState === "complete") {
+        resolve();
+        return;
+      }
+      window.addEventListener("load", resolve, { once: true });
+    });
+
+  const waitMinDuration = () =>
+    new Promise((resolve) => {
+      window.setTimeout(resolve, Number(minDurationMs) || 0);
+    });
+
+  const shouldShow = () => {
+    try {
+      return sessionStorage.getItem(storageKey) !== "1";
+    } catch {
+      return true;
+    }
+  };
+
+  const markSeen = () => {
+    try {
+      sessionStorage.setItem(storageKey, "1");
+    } catch {}
+  };
+
+  window.addEventListener("pageshow", (e) => {
+    if (e.persisted) hide();
+  });
+
+  if (shouldShow()) {
+    markSeen();
+    show();
+    Promise.all([waitForWindowLoad(), waitMinDuration()]).then(() => {
+      requestAnimationFrame(hide);
+    });
+  } else {
+    hide();
+  }
+</script>
+
+<style>
+  .page-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    background: var(--color-primary-950);
+    color: var(--color-alpha-100);
+    opacity: 1;
+    pointer-events: auto;
+    transition:
+      opacity 0.2s ease,
+      visibility 0s linear;
+  }
+
+  .page-loader[aria-hidden="true"] {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition:
+      opacity 0.2s ease,
+      visibility 0s linear 0.2s;
+  }
+
+  .page-loader__content {
+    width: min(520px, 86vw);
+  }
+
+  .page-loader__title {
+    font-family: var(--font-bbh-bartle);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-loader__bar {
+    height: 10px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: color-mix(in oklab, var(--color-alpha-100) 12%, transparent);
+  }
+
+  .page-loader__bar::before {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 40%;
+    border-radius: 999px;
+    background: var(--color-emphasis);
+    animation: page-loader-indeterminate 1s ease-in-out infinite;
+  }
+
+  @keyframes page-loader-indeterminate {
+    0% {
+      transform: translateX(-120%);
+    }
+    100% {
+      transform: translateX(260%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-loader__bar::before {
+      animation: none;
+      width: 100%;
+      opacity: 0.35;
+      transform: none;
+    }
+  }
+</style>

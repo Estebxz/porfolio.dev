@@ -4,8 +4,9 @@ import Layout from "@base/Layout.astro";
 import Footer from "@layout/Footer.astro";
 import Box from "@ui/Box.astro";
 import SocialLink from "@layout/SocialLink.astro";
+import Hero from "@layout/Hero.astro";
 import List from "@project/List.astro";
-
+import ScrollIcon from "@asset/scroll-icon.svg";
 import GetCopyword from "@svelte/GetCopyword.svelte";
 ---
 
@@ -14,7 +15,20 @@ import GetCopyword from "@svelte/GetCopyword.svelte";
   description="Colección de proyectos y experimentos en desarrollo web. Interfaces modernas, arquitectura frontend y soluciones orientadas a producto."
 >
   <main>
-    <Box id="project" class="mt-8 sm:mt-12 md:mt-16">
+    <Box id="hero" class="flex min-h-[85svh] flex-col pt-14 pb-8 sm:pt-20">
+      <Hero />
+      <ScrollIcon
+        class:list={[
+          "mt-auto",
+          "size-6",
+          "scroll-icon",
+          "text-alpha-100",
+          "self-center",
+        ]}
+      />
+    </Box>
+
+    <Box id="project">
       <List />
     </Box>
 
@@ -31,3 +45,35 @@ import GetCopyword from "@svelte/GetCopyword.svelte";
     <Footer />
   </div>
 </Layout>
+
+<style>
+  @keyframes scroll-dot {
+    0% {
+      transform: translateY(-60px);
+      opacity: 0.9;
+    }
+    35% {
+      transform: translateY(60px);
+      opacity: 0.3;
+    }
+    70% {
+      transform: translateY(60px);
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(-60px);
+      opacity: 0.9;
+    }
+  }
+
+  :global(.scroll-icon .scroll-icon__dot) {
+    transform-origin: center;
+    animation: scroll-dot 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.scroll-icon .scroll-icon__dot) {
+      animation: none;
+    }
+  }
+</style>

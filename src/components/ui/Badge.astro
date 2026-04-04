@@ -1,0 +1,48 @@
+---
+interface Props {
+  duration?: string;
+}
+
+const { duration = "2s" } = Astro.props;
+---
+
+<div class="flex items-center" role="status" aria-live="polite">
+  <span class="relative inline-flex overflow-hidden rounded-full p-px">
+    <span
+      class="rainbow absolute inset-0 scale-150"
+      style={`animation-duration: ${duration}`}
+      aria-hidden="true"
+    />
+    <div class="relative inline-flex w-full items-center justify-center gap-2 rounded-full bg-success/10 px-3 py-2 text-sm text-alpha-100 backdrop-blur-3xl whitespace-nowrap">
+      <span class="relative flex size-3.5 shrink-0 items-center justify-center" aria-hidden="true">
+        <span class="bg-success/80 absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
+        <span class="relative inline-flex size-2 rounded-full bg-green-500" />
+      </span>
+      <slot />
+    </div>
+  </span>
+</div>
+
+<style>
+  @keyframes rotate {
+    100% {
+      transform: rotate(1turn);
+    }
+  }
+
+  .rainbow::before {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    left: -50%;
+    top: -50%;
+    width: 200%;
+    height: 200%;
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    background-size: 50% 30%;
+    filter: blur(6px);
+    background-image: linear-gradient(to right, #16a34a, #22c55e, #4ade80);
+    animation: rotate 4s linear infinite;
+  }
+</style>

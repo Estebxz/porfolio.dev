@@ -43,8 +43,6 @@
 </button>
 
 <style>
-  /* Botón base */
-  /* Botón base */
   .copy-wrapper {
     display: inline-flex;
     flex-direction: column;
@@ -65,22 +63,20 @@
 
   .copy-wrapper.copied .hint {
     opacity: 1;
-    color: var(--color-emphasis);
+    color: var(--color-yellow);
   }
 
-  /* Texto */
   .word {
     font-weight: 500;
   }
 
-  /* Tooltip visual */
   .hint {
     flex-direction: column;
     font-size: 1rem;
     margin-top: 4px;
     opacity: 0;
     text-transform: uppercase;
-    color: var(--color-steel-blue); /* 👈 color base */
+    color: var(--color-yellow);
     transform: translateY(-4px);
     transition:
       opacity 0.2s ease,
@@ -88,20 +84,17 @@
       color 0.2s ease;
   }
 
-  /* Hover y foco (desktop + teclado) */
   .copy-wrapper:hover .hint,
   .copy-wrapper:focus-visible .hint {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* Focus accesible */
   .copy-wrapper:focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 4px;
   }
 
-  /* Mejoras para móvil */
   @media (max-width: 640px) {
     .hint {
       font-size: 0.75rem;
@@ -111,23 +104,20 @@
     }
   }
 
-  /* Tablet */
   @media (min-width: 641px) and (max-width: 1024px) {
     .copy-wrapper {
       font-size: 1.75rem;
     }
   }
 
-  /* Touch devices */
   @media (hover: none) {
     .copy-wrapper:active .hint {
       opacity: 1;
       transform: translateY(0);
-      color: var(--color-emphasis); /* 👈 mismo comportamiento */
+      color: var(--color-yellow);
     }
   }
 
-  /* Reduce motion */
   @media (prefers-reduced-motion: reduce) {
     .copy-wrapper,
     .hint {
