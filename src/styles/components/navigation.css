@@ -4,7 +4,7 @@
   }
 
   .mobile-menu-list {
-    @apply bg-primary-800 border-alpha-800/50 text-alpha-200 flex min-w-48 flex-col gap-2 overflow-hidden rounded border py-3;
+    @apply bg-primary-700 border-alpha-200/40 pointer-events-none flex min-w-50 flex-col gap-2 overflow-hidden rounded-md border py-3;
   }
   .pagination-nav {
     @apply flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5;

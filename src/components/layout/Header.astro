@@ -25,45 +25,60 @@ import Logo from "@asset/logo.svg";
       aria-controls="mobile-menu"
       aria-expanded="false"
       aria-label="Abrir menú"
-      class="text-alpha-200 inline-flex size-10 items-center justify-center transition-transform md:hidden"
+      class="text-alpha-200 bg-primary-700 border-alpha-200/40 inline-flex size-10 items-center justify-center rounded-md border transition-transform md:hidden"
     >
       <span class="sr-only" id="menu-label">Abrir menú</span>
-      <UseIcon name="hamburger" class="icon" />
+      <UseIcon name="hamburger" class="size-6 shrink-0" />
     </button>
 
     <nav class="hidden md:block" aria-label="Menú principal">
       <ul class="flex flex-row gap-4" role="list">
         {
-          MAIN.map(({ url, title, label }) => (
-            <li>
-              <a
-                href={url}
-                title={label}
-                aria-label={label}
-                class="nav-base hover:border-alpha-100 hover:text-alpha-100 uppercase transition-colors duration-300"
-              >
-                {title}
-              </a>
-            </li>
-          ))
+          MAIN.map(({ url, title, label }) => {
+            if (!url) return null;
+            const hash = url.includes("#") ? `#${url.split("#")[1]}` : "";
+            return (
+              <li>
+                <a
+                  href={url}
+                  title={label}
+                  aria-label={label}
+                  class="nav-base hover:border-alpha-100 hover:text-alpha-100 uppercase transition-colors duration-300"
+                  data-nav-hash={hash || undefined}
+                >
+                  {title}
+                </a>
+              </li>
+            );
+          })
         }
       </ul>
     </nav>
 
     <nav
       id="mobile-menu"
-      class="mobile-menu-list pointer-events-none absolute top-full right-0 mt-2 mr-4 opacity-0 transition-all duration-300 md:hidden"
+      class="mobile-menu-list absolute top-full right-0 mr-4 opacity-0 transition-all duration-300 md:hidden"
       aria-label="Menú móvil"
     >
       <ul class="flex flex-col" role="list">
         {
-          MAIN.map(({ url, title, label }) => (
-            <li>
-              <a href={url} title={label} aria-label={label} class="nav-base">
-                {title}
-              </a>
-            </li>
-          ))
+          MAIN.map(({ url, title, label }) => {
+            if (!url) return null;
+            const hash = url.includes("#") ? `#${url.split("#")[1]}` : "";
+            return (
+              <li>
+                <a
+                  href={url}
+                  title={label}
+                  aria-label={label}
+                  class="nav-base"
+                  data-nav-hash={hash || undefined}
+                >
+                  {title}
+                </a>
+              </li>
+            );
+          })
         }
       </ul>
     </nav>
@@ -77,10 +92,31 @@ import Logo from "@asset/logo.svg";
     const label = document.getElementById("menu-label");
     if (!toggle || !menu) return;
 
+    const ac = new AbortController();
+    const { signal } = ac;
+
+    const navLinks = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>("a[data-nav-hash]"),
+    );
+
+    const setActiveHash = (hash: string) => {
+      const normalized = hash?.startsWith("#") ? hash : "";
+      for (const a of navLinks) {
+        const active = !!normalized && a.dataset.navHash === normalized;
+        const isMobile = !!a.closest("#mobile-menu");
+        a.classList.toggle("border-none", !active);
+        a.classList.toggle("lg:border-alpha-100", active);
+        a.classList.toggle("text-alpha-100", active);
+        a.classList.toggle("bg-alpha-800/40", active && isMobile);
+        a.toggleAttribute("aria-current", active);
+      }
+    };
+
     const setOpen = (open: boolean) => {
       toggle.setAttribute("aria-expanded", String(open));
-      toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
-      if (label) label.textContent = open ? "Cerrar menú" : "Abrir menú";
+      const txt = open ? "Cerrar menú" : "Abrir menú";
+      toggle.setAttribute("aria-label", txt);
+      if (label) label.textContent = txt;
       menu.classList.toggle("opacity-0", !open);
       menu.classList.toggle("pointer-events-none", !open);
       menu.classList.toggle("opacity-100", open);
@@ -88,19 +124,44 @@ import Logo from "@asset/logo.svg";
     };
 
     const isOpen = () => toggle.getAttribute("aria-expanded") === "true";
+
     setOpen(false);
+    setActiveHash(window.location.hash);
 
-    toggle.addEventListener("click", () => setOpen(!isOpen()));
+    // Intersection observer para secciones
+    const sections = navLinks
+      .map((a) => (a.dataset.navHash || "").replace(/^#/, ""))
+      .filter(Boolean)
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
 
-    document.addEventListener("click", (e) => {
-      if (!isOpen()) return;
-      const t = e.target;
-      if (t instanceof Node && !menu.contains(t) && !toggle.contains(t)) setOpen(false);
-    });
+    if (sections.length) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const top = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (top?.target instanceof HTMLElement)
+            setActiveHash(`#${top.target.id}`);
+        },
+        { threshold: [0.4, 0.6] },
+      );
+      sections.forEach((s) => observer.observe(s));
+      signal.addEventListener("abort", () => observer.disconnect());
+    }
 
+    // Eventos — todos con signal para cleanup automático
+    window.addEventListener("hashchange", () => setActiveHash(window.location.hash), { signal });
+    toggle.addEventListener("click", () => setOpen(!isOpen()), { signal });
     menu.addEventListener("click", (e) => {
       if (e.target instanceof Element && e.target.closest("a")) setOpen(false);
-    });
+    }, { signal });
+    document.addEventListener("click", (e) => {
+      if (isOpen() && e.target instanceof Node && !menu.contains(e.target) && !toggle.contains(e.target))
+        setOpen(false);
+    }, { signal });
+
+    document.addEventListener("astro:before-swap", () => ac.abort(), { once: true, signal });
   };
 
   document.addEventListener("astro:page-load", bind);

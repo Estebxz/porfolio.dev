@@ -65,9 +65,9 @@
     />
   </symbol>
 
-  <symbol id="icon-hamburger" viewBox="0 0 17 14">
+  <symbol id="icon-hamburger" viewBox="0 0 24 24">
     <path
-      d="M3 12h12M3 6h18M3 18h18"
+      d="M5 17h8M5 12h14M5 7h8"
       fill="none"
       stroke="currentColor"
       stroke-width="2"

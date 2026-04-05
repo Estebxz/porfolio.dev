@@ -3,10 +3,10 @@
     font-family: var(--font-bbh-bartle);
     @apply text-alpha-100 text-2xl leading-tight font-semibold tracking-wide capitalize sm:text-4xl md:text-6xl;
   }
-  .section-title { @apply text-sm font-normal tracking-tighter uppercase md:text-base lg:text-xl lg:tracking-tight; }
+  .section-title { @apply text-sm font-normal tracking-tighter uppercase md:text-base lg:text-xl lg:tracking-tight text-alpha-100; }
   .subtitle { @apply text-base font-light capitalize; }
   .paragraph { @apply text-alpha-200 text-base leading-relaxed font-light md:text-lg; }
   .section-label { @apply text-alpha-700 text-xs font-light uppercase; }
-  .credit-label { @apply text-base font-normal uppercase; }
+  .credit-label { @apply text-base font-normal uppercase text-alpha-800; }
   .emphasis-text { @apply text-alpha-100 text-base leading-normal font-light; }
 }
