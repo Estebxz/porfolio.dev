@@ -6,7 +6,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/609e788f-b92f-4fbd-bbb7-c146806dcd47/deploy-status)](https://app.netlify.com/projects/joanmm/deploys)
 <a href="https://joanmm.netlify.app/" target="_blank" rel="noopener noreferrer">
  
-![Vista previa](/public/images/repo-image.webp)
+![Vista previa](/src/assets/images/repo-image.webp)
 
 </a>
 
