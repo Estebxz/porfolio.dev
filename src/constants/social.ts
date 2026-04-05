@@ -1,7 +1,6 @@
-import { getCollection } from "astro:content";
-import type { SocialTypes, Platform } from "@type/types";
+import type { Platform } from "@type/types";
 
-const CONFIG: Record<string, Platform> = {
+export const CONFIG: Record<string, Platform> = {
   GitHub: {
     tooltip: "Explora mis proyectos y contribuciones",
     color: "hover:border-x-purple-800",
@@ -17,22 +16,4 @@ const CONFIG: Record<string, Platform> = {
   },
 };
 
-export async function getSocialPlatform(): Promise<readonly SocialTypes[]> {
-  const entries = await getCollection("authors");
-  const author = entries?.[0]?.data as {
-    social_links?: { platform: string; url: string }[];
-  };
-
-  if (!author?.social_links?.length) return [];
-
-  return author.social_links.map(({ platform, url }) => {
-    const config = CONFIG[platform];
-
-    return {
-      title: platform,
-      url: url,
-      label: `Visitar mi perfil de ${platform}`,
-      ...config,
-    };
-  });
-}
+export const PLATFORMS = ["GitHub", "Linkedin", "CV"] as const;

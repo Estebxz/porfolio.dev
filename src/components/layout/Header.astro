@@ -10,7 +10,7 @@ import Logo from "@asset/logo.svg";
     <a
       href="/"
       aria-label="Inicio"
-      class="group text-alpha-200 inline-flex transition-colors duration-300 hover:text-yellow"
+      class="group text-alpha-200 hover:text-yellow inline-flex transition-colors duration-300"
     >
       <Logo
         width="40"
@@ -31,7 +31,6 @@ import Logo from "@asset/logo.svg";
       <UseIcon name="hamburger" class="icon" />
     </button>
 
-    <!-- Menú desktop -->
     <nav class="hidden md:block" aria-label="Menú principal">
       <ul class="flex flex-row gap-4" role="list">
         {
@@ -51,7 +50,6 @@ import Logo from "@asset/logo.svg";
       </ul>
     </nav>
 
-    <!-- Menú móvil -->
     <nav
       id="mobile-menu"
       class="mobile-menu-list pointer-events-none absolute top-full right-0 mt-2 mr-4 opacity-0 transition-all duration-300 md:hidden"
@@ -71,6 +69,42 @@ import Logo from "@asset/logo.svg";
     </nav>
   </div>
 </header>
+
+<script>
+  const bind = () => {
+    const toggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("mobile-menu");
+    const label = document.getElementById("menu-label");
+    if (!toggle || !menu) return;
+
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+      if (label) label.textContent = open ? "Cerrar menú" : "Abrir menú";
+      menu.classList.toggle("opacity-0", !open);
+      menu.classList.toggle("pointer-events-none", !open);
+      menu.classList.toggle("opacity-100", open);
+      menu.classList.toggle("pointer-events-auto", open);
+    };
+
+    const isOpen = () => toggle.getAttribute("aria-expanded") === "true";
+    setOpen(false);
+
+    toggle.addEventListener("click", () => setOpen(!isOpen()));
+
+    document.addEventListener("click", (e) => {
+      if (!isOpen()) return;
+      const t = e.target;
+      if (t instanceof Node && !menu.contains(t) && !toggle.contains(t)) setOpen(false);
+    });
+
+    menu.addEventListener("click", (e) => {
+      if (e.target instanceof Element && e.target.closest("a")) setOpen(false);
+    });
+  };
+
+  document.addEventListener("astro:page-load", bind);
+</script>
 
 <style>
   header {

@@ -1,6 +1,6 @@
 import { defineCollection } from "astro:content";
 import { supabase } from "@lib/supabase";
-import { BACKGROUNDS, STATUS } from "@constants/project";
+import { STATUS } from "@constants/project";
 import { projectSchema, socialSchema } from "@type/schemas";
 
 const projects = defineCollection({
@@ -30,7 +30,7 @@ const projects = defineCollection({
       repo_url: p.repo_url,
       page_name: p.page_name,
       page_description: p.page_description,
-      background: BACKGROUNDS[p.slug],
+      background: p.slug,
       status: STATUS[p.slug],
     }));
   },

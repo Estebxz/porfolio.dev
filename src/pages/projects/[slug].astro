@@ -1,23 +1,18 @@
 ---
 import Layout from "@base/Layout.astro";
-import Navegation from "@project/Navegation.astro";
 import Button from "@ui/Button.astro";
 import UseIcon from "@ui/UseIcon.astro";
+import Navegation from "@project/Navegation.astro";
 
 import { Image } from "astro:assets";
-import { getItems } from "@constants/project";
-import type { ProjectActions } from "@type/types";
+import { getAdjacentProjects, getBackgrounds, getProjectActions, getItems } from "@lib/collections";
 
 export async function getStaticPaths() {
   const items = await getItems();
 
   return items.map((item, index) => ({
     params: { slug: item.slug },
-    props: {
-      item,
-      index,
-      items,
-    },
+    props: { item, index, items }
   }));
 }
 
@@ -37,48 +32,22 @@ const {
   repo_url,
   page_name,
   page_description,
-  background,
+  background
 } = item;
 
-const layoutTitle = page_name ?? title;
-const layoutDescription = page_description ?? description ?? "";
-
-const logoSrc = logomark ?? picture;
-const previewSrc = picture ?? logomark;
-
-if (!logoSrc || !previewSrc) {
-  return Astro.redirect("/404");
-}
-
-const PROJECT_ACTIONS: ProjectActions[] = [
-  site_url && {
-    url: site_url,
-    label: "Abrir sitio web",
-    tooltip: "Ver el proyecto en acción",
-    icon: "arrow-up-right-from-square",
-    color: "hover:border-x-white",
-  },
-  repo_url && {
-    url: repo_url,
-    label: "Ver repositorio",
-    tooltip: "Espiar el código fuente",
-    icon: "github",
-    color: "hover:border-x-purple-800",
-  },
-].filter(Boolean) as ProjectActions[];
-
-const prevProject = index > 0 ? items[index - 1] : null;
-const nextProject = index < items.length - 1 ? items[index + 1] : null;
+const PROJECT_ACTIONS = getProjectActions(site_url, repo_url);
+const { prev: prevProject, next: nextProject } = getAdjacentProjects(items, index);
+const backgroundImage = getBackgrounds(background);
 ---
 
-<Layout title={layoutTitle} description={layoutDescription}>
+<Layout title={page_name} description={page_description}>
   <main class="container mx-auto px-10 py-12 md:px-46 md:py-20">
     <section
       class="grid min-h-150 grid-cols-1 items-start gap-10 md:gap-20 lg:min-h-130 lg:grid-cols-2"
     >
       <div class="flex max-w-xl flex-col gap-4">
         <Image
-          src={logoSrc}
+          src={logomark}
           alt="Imagen logo"
           width="600"
           height="600"
@@ -93,9 +62,9 @@ const nextProject = index < items.length - 1 ? items[index + 1] : null;
       <div class="relative">
         <div aria-hidden="true">
           {
-            background ? (
+            backgroundImage ? (
               <Image
-                src={background}
+                src={backgroundImage}
                 alt=""
                 width={600}
                 height={600}
@@ -108,7 +77,7 @@ const nextProject = index < items.length - 1 ? items[index + 1] : null;
         </div>
         <figure class="card z-10">
           <Image
-            src={previewSrc}
+            src={picture}
             alt={`Vista previa de ${title}`}
             width="1200"
             height="900"
@@ -133,7 +102,7 @@ const nextProject = index < items.length - 1 ? items[index + 1] : null;
                             "border-alpha-200",
                             color,
                             "transition-all",
-                            "duration-200",
+                            "duration-300",
                           ]}
                         >
                           {icon && <UseIcon name={icon} class="icon" />}

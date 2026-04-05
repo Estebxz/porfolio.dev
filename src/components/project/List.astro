@@ -1,5 +1,5 @@
 ---
-import { getItems } from "@constants/project";
+import { getItems } from "@lib/collections";
 import Tabs from "@ui/Tabs.astro";
 
 const projects = await getItems();
@@ -18,7 +18,7 @@ const filters = [
   <div class="projects-header">
     <h1 class="section-title text-alpha-100">Proyectos</h1>
 
-    <div class="projects-header__tabs my-4" aria-label="Filtrar proyectos">
+    <div class="flex my-4" aria-label="Filtrar proyectos">
       <Tabs
         options={filters}
         name="project-status"
@@ -49,6 +49,58 @@ const filters = [
   </section>
 </div>
 
+<script>
+  const VALID = new Set(["all", "done", "in_progress"]);
+  const STORAGE_KEY = "projects.status";
+
+  const sanitize = (s: string | null) => (s && VALID.has(s) ? s : "all");
+  const isActive = () => document.querySelector('input[name="project-status"]') !== null;
+
+  function getStatus() {
+    const param = new URL(window.location.href).searchParams.get("status");
+    return sanitize(param ?? sessionStorage.getItem(STORAGE_KEY));
+  }
+
+  function setUrl(status: string) {
+    const url = new URL(window.location.href);
+    if (status === "all") url.searchParams.delete("status");
+    else url.searchParams.set("status", status);
+    url.hash = "project";
+    history.replaceState({}, "", url);
+  }
+
+  function applyFilter(status: string) {
+    if (status === "all") sessionStorage.removeItem(STORAGE_KEY);
+    else sessionStorage.setItem(STORAGE_KEY, status);
+
+    document.querySelectorAll<HTMLInputElement>('input[name="project-status"]')
+      .forEach((input) => (input.checked = input.value === status));
+
+    document.querySelectorAll<HTMLAnchorElement>("a[data-status]")
+      .forEach((a) => {
+        const li = a.closest("li");
+        if (li) li.hidden = status !== "all" && a.getAttribute("data-status") !== status;
+      });
+  }
+
+  function init() {
+    if (!isActive()) return;
+
+    applyFilter(getStatus());
+
+    document.querySelectorAll<HTMLInputElement>('input[name="project-status"]')
+      .forEach((input) =>
+        input.addEventListener("change", () => {
+          const status = sanitize(input.value);
+          setUrl(status);
+          applyFilter(status);
+        })
+      );
+  }
+
+  document.addEventListener("astro:page-load", init);
+</script>
+
 <style>
   .projects-header {
     display: flex;
@@ -56,10 +108,6 @@ const filters = [
     justify-content: space-between;
     gap: 1rem;
     flex-wrap: wrap;
-  }
-
-  .projects-header__tabs {
-    display: flex;
   }
 
   @media (max-width: 640px) {
@@ -161,74 +209,3 @@ const filters = [
     }
   }
 </style>
-
-<script>
-  const VALID = new Set(["all", "done", "in_progress"]);
-  const STORAGE_KEY = "projects.status";
-
-  function getStatusFromUrl() {
-    const url = new URL(window.location.href);
-    const s = url.searchParams.get("status");
-    if (s && VALID.has(s)) return s;
-
-    if (url.hash === "#project") return "all";
-
-    const stored = sessionStorage.getItem(STORAGE_KEY);
-    return stored && VALID.has(stored) ? stored : "all";
-  }
-
-  function setUrl(nextStatus: string) {
-    const status = VALID.has(nextStatus) ? nextStatus : "all";
-    const url = new URL(window.location.href);
-
-    if (status === "all") url.searchParams.delete("status");
-    else url.searchParams.set("status", status);
-
-    url.hash = "project";
-    history.replaceState({}, "", url);
-  }
-
-  function applyFilter(nextStatus: string) {
-    const status = VALID.has(nextStatus) ? nextStatus : "all";
-
-    if (status === "all") sessionStorage.removeItem(STORAGE_KEY);
-    else sessionStorage.setItem(STORAGE_KEY, status);
-
-    document
-      .querySelectorAll<HTMLInputElement>('input[name="project-status"]')
-      .forEach((input) => {
-        input.checked = (input.value ?? "all") === status;
-      });
-
-    document
-      .querySelectorAll<HTMLAnchorElement>("a[data-status]")
-      .forEach((a) => {
-        const itemStatus = a.getAttribute("data-status");
-        const li = a.closest("li");
-        if (!li) return;
-        li.hidden = status === "all" ? false : itemStatus !== status;
-      });
-  }
-
-  applyFilter(getStatusFromUrl());
-
-  document
-    .querySelectorAll<HTMLInputElement>('input[name="project-status"]')
-    .forEach((input) => {
-      input.addEventListener("change", () => {
-        const key = input.value ?? "all";
-        if (!VALID.has(key)) return;
-        setUrl(key);
-        applyFilter(key);
-        document.getElementById("project")?.scrollIntoView();
-      });
-    });
-
-  window.addEventListener("popstate", () => {
-    applyFilter(getStatusFromUrl());
-  });
-
-  window.addEventListener("hashchange", () => {
-    applyFilter(getStatusFromUrl());
-  });
-</script>

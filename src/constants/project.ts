@@ -1,28 +1,29 @@
-import { getCollection } from "astro:content";
+import insights from "@asset/images/insights.webp";
+import code from "@asset/images/code.webp";
+import classify from "@asset/images/classify.webp";
+import guardao from "@asset/images/guardao.webp";
+import colsof from "@asset/images/colsof.webp";
 
-import type { ProjectTypes } from "@type/schemas";
+import type { ImageMetadata } from "astro";
 
-export async function getItems(): Promise<readonly ProjectTypes[]> {
-  const entries = await getCollection("projects");
-  return entries.map((e) => ({
-    ...e.data,
-    id: e.data.project_id,
-    slug: e.id,
-  }));
-}
-
-export const BACKGROUNDS: Record<string, string> = {
-  data_insights_dyret: "/images/insights.webp",
-  codepicture: "/images/code.webp",
-  "classify-ai": "/images/classify.webp",
-  guardao: "/images/guardao.webp",
-  colsof: "/images/colsof.webp",
+export const BACKGROUNDS: Record<string, ImageMetadata> = {
+  data_insights_dyret: insights,
+  codepicture: code,
+  classify_ai: classify,
+  guardao: guardao,
+  colsof: colsof,
 };
 
 export const STATUS: Record<string, "done" | "in_progress"> = {
   data_insights_dyret: "done",
   codepicture: "in_progress",
-  "classify-ai": "done",
+  classify_ai: "done",
   guardao: "in_progress",
   colsof: "in_progress",
 };
+
+export const items: { top: string; bottom: string }[] = [
+  { top: "40+", bottom: "Repositorios" },
+  { top: "1+", bottom: "Año de Experiencia" },
+  { top: "BTÁ", bottom: "Colombia" },
+];

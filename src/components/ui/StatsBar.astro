@@ -1,26 +1,14 @@
 ---
-type StatItem = {
-  top: string;
-  bottom: string;
-};
+import { items } from "@constants/project";
 
-const items: StatItem[] = [
-  { top: "40+", bottom: "Repositorios" },
-  { top: "1+", bottom: "Año de Experiencia" },
-  { top: "BOG", bottom: "Colombia" },
-];
+const positions = ["is-left", "is-middle", "is-right"];
 ---
 
 <div class="statsbar" role="list" aria-label="Resumen">
   {
     items.map((item, idx) => (
       <div
-        class:list={[
-          "statsbar__item",
-          idx === 0 && "is-left",
-          idx === 1 && "is-middle",
-          idx === 2 && "is-right",
-        ]}
+        class:list={["statsbar__item", positions[idx]]}
         role="listitem"
       >
         <div class="statsbar__top">{item.top}</div>
@@ -48,32 +36,35 @@ const items: StatItem[] = [
     justify-content: center;
     gap: 4px;
     text-align: center;
-    color: var(--color-alpha-100);
+    color: white;
   }
 
-  .statsbar__item.is-left {
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .statsbar__item.is-right {
-    align-items: flex-end;
-    text-align: right;
-    color: var(--color-yellow);
-  }
+  .statsbar__item.is-left  { align-items: flex-start; text-align: left; }
+  .statsbar__item.is-right { align-items: flex-end;   text-align: right; }
 
   .statsbar__item.is-middle::before,
   .statsbar__item.is-middle::after {
     content: "";
     position: absolute;
-    top: 25%;
-    bottom: 25%;
+    inset-block: 25%;
     width: 1px;
     background: color-mix(in oklch, var(--color-alpha-100) 30%, transparent);
   }
 
   .statsbar__item.is-middle::before { left: 0; }
   .statsbar__item.is-middle::after  { right: 0; }
+
+  .statsbar__item.is-right .statsbar__top {
+    background: linear-gradient(
+      to bottom,
+      var(--color-yellow) 0%,
+      rgb(255, 255, 0) 50%,
+      rgb(206, 17, 38) 50%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 
   .statsbar__top {
     font-weight: 700;
@@ -87,14 +78,11 @@ const items: StatItem[] = [
     letter-spacing: 0.18em;
     text-transform: uppercase;
     opacity: 0.4;
+    color: var(--color-alpha-100);
   }
 
   @media (max-width: 640px) {
-    .statsbar__item {
-      padding: 14px 12px;
-    }
-    .statsbar__top {
-      font-size: 1rem;
-    }
+    .statsbar__item { padding: 14px 12px; }
+    .statsbar__top  { font-size: 1rem; }
   }
 </style>

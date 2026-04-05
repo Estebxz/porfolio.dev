@@ -14,7 +14,8 @@
       "@project/*": ["src/components/project/*"],
       "@svelte/*": ["src/components/svelte/*"],
       "@api/*": ["src/services/api/*"],
-      "@asset/*": ["src/assets/*"]
+      "@asset/*": ["src/assets/*"],
+      "@script/*": ["src/scripts/*"]
     }
   },
   "include": [".astro/types.d.ts", "**/*"],
