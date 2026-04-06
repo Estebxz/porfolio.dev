@@ -3,19 +3,18 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@type/*": ["src/types/*"],
-      "@constants/*": ["src/constants/*"],
-      "@lib/*": ["src/lib/*"],
-      "@style/*": ["src/styles/*"],
-      "@base/*": ["src/layouts/*"],
-      "@component/*": ["src/components/*"],
-      "@ui/*": ["src/components/ui/*"],
-      "@layout/*": ["src/components/layout/*"],
-      "@project/*": ["src/components/project/*"],
-      "@svelte/*": ["src/components/svelte/*"],
       "@api/*": ["src/services/api/*"],
       "@asset/*": ["src/assets/*"],
-      "@script/*": ["src/scripts/*"]
+      "@base/*": ["src/layouts/*"],
+      "@component/*": ["src/components/*"],
+      "@constants/*": ["src/constants/*"],
+      "@layout/*": ["src/components/layout/*"],
+      "@lib/*": ["src/lib/*"],
+      "@project/*": ["src/components/project/*"],
+      "@styles/*": ["src/styles/*"],
+      "@svelte/*": ["src/components/svelte/*"],
+      "@type/*": ["src/types/*"],
+      "@ui/*": ["src/components/ui/*"]
     }
   },
   "include": [".astro/types.d.ts", "**/*"],

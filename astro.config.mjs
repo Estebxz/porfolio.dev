@@ -17,10 +17,5 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [
-    svelte(),
-    sitemap({
-      entryLimit: 10000,
-    }),
-  ],
+  integrations: [svelte(), sitemap()],
 });

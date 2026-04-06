@@ -24,8 +24,6 @@
   },
   "devDependencies": {
     "@typescript-eslint/parser": "8.54.0",
-    "ajv": "8",
-    "ajv-errors": "3",
     "eslint": "9.39.2",
     "eslint-plugin-astro": "1.5.0",
     "prettier": "3.8.1",

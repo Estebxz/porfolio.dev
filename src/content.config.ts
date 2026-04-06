@@ -46,7 +46,6 @@ const authors = defineCollection({
     if (error) throw error;
 
     return (data ?? [])
-      .filter((a) => a.id != null)
       .map((a) => ({
         id: String(a.id),
         social_links: a.social_links,
