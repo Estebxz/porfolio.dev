@@ -62,5 +62,4 @@ export async function getSocialPlatform(): Promise<readonly SocialTypes[]> {
   });
 }
 
-export const getBackgrounds = (background?: string | null) =>
-  background ? (BACKGROUNDS[background] ?? null) : null;
+export const getBackgrounds = (background: string) => BACKGROUNDS[background];

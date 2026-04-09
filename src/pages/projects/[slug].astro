@@ -42,46 +42,41 @@ const backgroundImage = getBackgrounds(background);
 
 <Layout title={page_name} description={page_description}>
   <main class="container mx-auto px-10 py-12 md:px-46 md:py-20">
-    <section
-      class="grid min-h-150 grid-cols-1 items-start gap-10 md:gap-20 lg:min-h-130 lg:grid-cols-2"
-    >
+    <section class="grid min-h-150 grid-cols-1 items-start gap-10 md:gap-20 lg:min-h-130 lg:grid-cols-2">
       <div class="flex max-w-xl flex-col gap-4">
         <Image
           src={logomark}
-          alt="Imagen logo"
-          width="600"
-          height="600"
-          loading="eager"
+          alt={`Logomarca de ${title}`}
+          width={600}
+          height={600}
+          loading="lazy"
           decoding="async"
           transition:name={`title-${slug}`}
         />
         <h1 class="section-title">Descripción</h1>
-        {description ? <p class="paragraph">{description}</p> : null}
+        <p class="paragraph">{description}</p>
       </div>
 
       <div class="relative">
         <div aria-hidden="true">
-          {
-            backgroundImage ? (
-              <Image
-                src={backgroundImage}
-                alt=""
-                width={600}
-                height={600}
-                class="glow"
-                loading="eager"
-                decoding="async"
-              />
-            ) : null
-          }
+          <Image
+            src={backgroundImage}
+            alt={`Fondo de ${title}`}
+            width={600}
+            height={600}
+            class="glow"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <figure class="card z-10">
           <Image
             src={picture}
             alt={`Vista previa de ${title}`}
-            width="1200"
-            height="900"
+            width={1200}
+            height={900}
             loading="eager"
+            fetchpriority="high"
             decoding="async"
           />
           <figcaption class="ui-actions">

@@ -11,7 +11,7 @@ export const projectSchema = z.object({
   repo_url: z.url().nullish().transform((v) => v ?? undefined),
   page_name: z.string(),
   page_description: z.string(),
-  background: z.string().nullable().optional(),
+  background: z.string(),
   status: z.enum(["done", "in_progress"]).nullable().optional().default("done")
 });
 
