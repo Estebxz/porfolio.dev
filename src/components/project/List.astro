@@ -186,9 +186,15 @@ const filters = [
   @media (min-width: 640px) {
     .hollow-text {
       display: block;
-      white-space: nowrap;
+      white-space: normal;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hollow-text {
+      white-space: nowrap;
     }
   }
 

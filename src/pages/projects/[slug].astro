@@ -61,17 +61,20 @@ const backgroundImage = getBackgrounds(background);
         <div aria-hidden="true">
           <Image
             src={backgroundImage}
+            sizes="(min-width: 1024px) 50vw, 100vw"
             alt={`Fondo de ${title}`}
             width={600}
             height={600}
             class="glow"
-            loading="lazy"
+            loading="eager"
+            fetchpriority="high"
             decoding="async"
           />
         </div>
         <figure class="card z-10">
           <Image
             src={picture}
+            sizes="(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, 720px"
             alt={`Vista previa de ${title}`}
             width={1200}
             height={900}

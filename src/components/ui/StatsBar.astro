@@ -7,10 +7,7 @@ const positions = ["is-left", "is-middle", "is-right"];
 <div class="statsbar" role="list" aria-label="Resumen">
   {
     items.map((item, idx) => (
-      <div
-        class:list={["statsbar__item", positions[idx]]}
-        role="listitem"
-      >
+      <div class:list={["statsbar__item", positions[idx]]} role="listitem">
         <div class="statsbar__top">{item.top}</div>
         <div class="statsbar__bottom">{item.bottom}</div>
       </div>
@@ -24,11 +21,13 @@ const positions = ["is-left", "is-middle", "is-right"];
     align-items: stretch;
     justify-content: space-between;
     width: 100%;
+    overflow-x: clip;
   }
 
   .statsbar__item {
     position: relative;
     flex: 1 1 0;
+    min-width: 0;
     padding: 18px 22px;
     display: flex;
     flex-direction: column;
@@ -39,8 +38,14 @@ const positions = ["is-left", "is-middle", "is-right"];
     color: var(--color-alpha-100);
   }
 
-  .statsbar__item.is-left  { align-items: flex-start; text-align: left; }
-  .statsbar__item.is-right { align-items: flex-end;   text-align: right; }
+  .statsbar__item.is-left {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .statsbar__item.is-right {
+    align-items: flex-end;
+    text-align: right;
+  }
 
   .statsbar__item.is-middle::before,
   .statsbar__item.is-middle::after {
@@ -51,8 +56,12 @@ const positions = ["is-left", "is-middle", "is-right"];
     background: color-mix(in oklch, var(--color-alpha-100) 30%, transparent);
   }
 
-  .statsbar__item.is-middle::before { left: 0; }
-  .statsbar__item.is-middle::after  { right: 0; }
+  .statsbar__item.is-middle::before {
+    left: 0;
+  }
+  .statsbar__item.is-middle::after {
+    right: 0;
+  }
 
   .statsbar__item.is-right .statsbar__top {
     background: linear-gradient(
@@ -76,12 +85,18 @@ const positions = ["is-left", "is-middle", "is-right"];
     font-size: 0.65rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
+    white-space: normal;
+    overflow-wrap: anywhere;
     opacity: 0.4;
     color: var(--color-alpha-100);
   }
 
   @media (max-width: 640px) {
-    .statsbar__item { padding: 14px 12px; }
-    .statsbar__top  { font-size: 1rem; }
+    .statsbar__item {
+      padding: 14px 12px;
+    }
+    .statsbar__top {
+      font-size: 1rem;
+    }
   }
 </style>

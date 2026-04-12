@@ -15,7 +15,7 @@ const SOCIAL = await getSocialPlatform();
     class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4"
   >
     {
-      SOCIAL.map(({ title, url, label,  color, icon }) => (
+      SOCIAL.map(({ title, url, label, color, icon }) => (
         <li class="w-auto">
           <Button
             href={url}

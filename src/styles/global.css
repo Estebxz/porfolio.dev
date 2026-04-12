@@ -30,8 +30,10 @@
   --color-steel-purple: oklch(0.4926 0.1177 321.28);
   --color-yellow: oklch(0.8928 0.1831 96.54);
 
-  --font-inter: "Inter", sistem-ui, sans-serif;
-  --font-bbh-bartle: "BBH-Bartle", sistem-ui, sans-serif;
+  --font-inter: "Inter", system-ui, sans-serif;
+  --font-bbh-bartle: "BBH-Bartle", system-ui, sans-serif;
+
+  --svh-90: 90svh;
 }
 
 @theme {
@@ -52,6 +54,8 @@
 
   --font-inter: var(--font-inter);
   --font-bbh-bartle: var(--font-bbh-bartle);
+
+  --min-height-svh-90: var(--svh-90);
 }
 
 body {

@@ -3,14 +3,10 @@ import Badge from "@component/ui/Badge.astro";
 import StatsBar from "@component/ui/StatsBar.astro";
 ---
 
-<section
-  class="flex min-h-full w-full flex-col items-start gap-4 pb-8 text-sm md:items-center"
->
+<section class="flex min-h-full w-full flex-col items-center gap-4 pb-8 text-sm">
   <Badge>Disponible para nuevas oportunidades</Badge>
 
-  <h1
-    class="w-full max-w-4xl text-left text-3xl font-bold tracking-tight sm:text-center sm:text-3xl md:text-5xl lg:text-7xl"
-  >
+  <h1 class="w-full max-w-4xl text-center text-3xl font-bold tracking-tight sm:text-3xl md:text-5xl lg:text-7xl">
     <span class="hollow-text">Software</span>
     <span class="solid-text">Engineer</span>
   </h1>
@@ -27,23 +23,15 @@ import StatsBar from "@component/ui/StatsBar.astro";
     <path stroke="#777" stroke-width="10" d="M0 20h280"></path>
   </svg>
 
-  <p
-    class="text-alpha-200 max-w-2xl text-left text-sm leading-relaxed sm:text-center sm:text-base"
-  >
-    Soy un desarrollador colombiano, dedicado a crear
-    <strong class="text-alpha-100 font-medium"
-      >experiencias digitales interactivas en la web.</strong
-    >
+  <p class="paragraph text-center text-pretty max-w-6xl">
+    Soy un desarrollador colombiano, dedicado a crear <strong class="text-alpha-100">experiencias digitales interactivas en la web.</strong>
     En constante aprendizaje y mejora. En mis ratos libres, me enfoco en
-    <strong class="text-alpha-100 font-medium">proyectos reales</strong>
+    <strong class="text-alpha-100">proyectos reales</strong>
     donde implemento buenas prácticas y tecnologías actuales para ofrecer soluciones
-    funcionales y
-    <strong class="text-alpha-100 font-medium">centradas en el usuario</strong>.
+    funcionales y <strong class="text-alpha-100">centradas en el usuario.</strong>
   </p>
 
   <StatsBar />
-
-  
 </section>
 
 <style>

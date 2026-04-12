@@ -15,7 +15,7 @@ import GetCopyword from "@svelte/GetCopyword.svelte";
   description="Colección de proyectos y experimentos en desarrollo web. Interfaces modernas, arquitectura frontend y soluciones orientadas a producto."
 >
   <main>
-    <Box id="hero" class="flex min-h-[85svh] flex-col pt-14 pb-8 sm:pt-20">
+    <Box id="hero" class="flex min-h-svh-90 flex-col pt-14 pb-8 sm:pt-20">
       <Hero />
       <ScrollIcon
         class:list={[
@@ -28,7 +28,7 @@ import GetCopyword from "@svelte/GetCopyword.svelte";
       />
     </Box>
 
-    <Box id="project">
+    <Box id="project" class="mt-10">
       <List />
     </Box>
 
