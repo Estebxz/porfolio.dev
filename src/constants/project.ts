@@ -9,7 +9,7 @@ import type { ImageMetadata } from "astro";
 export const BACKGROUNDS: Record<string, ImageMetadata> = {
   data_insights_dyret: insights,
   codepicture: code,
-  "classify-ai": classify,
+  classify_ai: classify,
   guardao: guardao,
   colsof: colsof,
 };
@@ -17,7 +17,7 @@ export const BACKGROUNDS: Record<string, ImageMetadata> = {
 export const STATUS: Record<string, "done" | "in_progress"> = {
   data_insights_dyret: "done",
   codepicture: "in_progress",
-  "classify-ai": "done",
+  classify_ai: "done",
   guardao: "in_progress",
   colsof: "in_progress",
 };

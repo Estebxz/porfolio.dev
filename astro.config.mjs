@@ -10,11 +10,7 @@ export default defineConfig({
     svgo: true,
   },
 
-  prefetch: {
-    prefetchAll: false,
-    defaultStrategy: "hover",
-  },
-  
+  prefetch: true,
   output: "static",
   site: "https://joanmm.netlify.app",
 

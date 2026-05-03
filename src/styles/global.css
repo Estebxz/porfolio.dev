@@ -96,13 +96,11 @@ body::after {
 
 ::-webkit-scrollbar-track {
   background: var(--color-primary-850);
-  border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-alpha-800);
-  border-radius: 3px;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   background-clip: content-box;
 }
 
