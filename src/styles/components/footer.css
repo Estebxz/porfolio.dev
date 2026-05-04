@@ -1,8 +1,12 @@
 @layer components {
   .footer {
-    @apply max-w-7xl w-full my-auto mx-auto flex flex-col md:flex-row items-center md:justify-between gap-4;
+    @apply mx-auto my-auto flex w-full max-w-7xl flex-col items-center justify-between gap-4 md:flex-row;
   }
 
-  .footer-left { @apply flex items-center justify-center md:justify-start gap-2 text-center md:text-left; }
-  .footer-right { @apply flex flex-col sm:flex-row items-center justify-center md:justify-end gap-1 sm:gap-2 text-center md:text-right text-xs; }
+  .footer-left {
+    @apply flex items-center justify-center gap-2 text-center md:justify-start md:text-left;
+  }
+  .footer-right {
+    @apply flex flex-col items-center justify-center gap-1 text-center text-xs sm:flex-row sm:gap-2 md:justify-end md:text-right;
+  }
 }

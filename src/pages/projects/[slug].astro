@@ -95,13 +95,7 @@ const backgroundImage = getBackgrounds(background);
                           ariaLabel={label}
                           rel="noopener noreferrer"
                           target="_blank"
-                          class:list={[
-                            "border",
-                            "border-alpha-200",
-                            color,
-                            "transition-all",
-                            "duration-300",
-                          ]}
+                          class:list={["border border-alpha-200", color]}
                         >
                           {icon && <UseIcon name={icon} class="icon" />}
                         </Button>

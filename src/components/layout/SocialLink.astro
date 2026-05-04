@@ -23,15 +23,7 @@ const SOCIAL = await getSocialPlatform();
             title={label}
             target="_blank"
             rel="noopener noreferrer"
-            class:list={[
-              "border",
-              "border-alpha-200",
-              color,
-              "transition-all",
-              "duration-200",
-              "text-sm",
-              "sm:text-base",
-            ]}
+            class:list={["border border-alpha-200 text-sm sm:text-base", color]}
           >
             {icon && (
               <UseIcon
