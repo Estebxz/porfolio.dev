@@ -3,10 +3,10 @@ import Badge from "@component/ui/Badge.astro";
 import StatsBar from "@component/ui/StatsBar.astro";
 ---
 
-<section class="flex min-h-full w-full flex-col items-center gap-4 pb-8 text-sm">
-  <Badge>Disponible para nuevas oportunidades</Badge>
+<div class="flex min-h-full w-full flex-col items-center gap-4 pb-8 text-sm">
+  <Badge>Summer Student</Badge>
 
-  <h1 class="w-full max-w-4xl text-center text-3xl font-bold tracking-tight sm:text-3xl md:text-5xl lg:text-7xl">
+  <h1 class="w-full max-w-4xl text-center text-3xl font-bold tracking-normal md:text-5xl lg:text-7xl">
     <span class="hollow-text">Software</span>
     <span class="solid-text">Engineer</span>
   </h1>
@@ -25,14 +25,14 @@ import StatsBar from "@component/ui/StatsBar.astro";
 
   <p class="paragraph text-center text-pretty max-w-6xl">
     Soy un desarrollador colombiano, dedicado a crear <strong class="text-alpha-100">experiencias digitales interactivas en la web.</strong>
-    En constante aprendizaje y mejora. En mis ratos libres, me enfoco en
-    <strong class="text-alpha-100">proyectos reales</strong>
+    En constante aprendizaje y mejora. En mis ratos libres, me enfoco en{" "}
+    <strong class="text-alpha-100">proyectos reales</strong>{" "}
     donde implemento buenas prácticas y tecnologías actuales para ofrecer soluciones
     funcionales y <strong class="text-alpha-100">centradas en el usuario.</strong>
   </p>
 
   <StatsBar />
-</section>
+</div>
 
 <style>
   .hollow-text {
