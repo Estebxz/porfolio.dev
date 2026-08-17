@@ -6,10 +6,6 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  experimental: {
-    svgo: true,
-  },
-
   prefetch: true,
   output: "static",
   site: "https://joanmm.netlify.app",
