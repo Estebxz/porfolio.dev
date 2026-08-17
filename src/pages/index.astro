@@ -11,13 +11,14 @@ import GetCopyword from "@svelte/GetCopyword.svelte";
 ---
 
 <Layout
-  title="Pagina de incio — Joan"
+  title="Página de inicio — Joan"
   description="Colección de proyectos y experimentos en desarrollo web. Interfaces modernas, arquitectura frontend y soluciones orientadas a producto."
 >
   <main>
-    <Box id="hero" class="flex min-h-svh-90 flex-col pt-14 pb-8 sm:pt-20">
+    <Box id="hero" ariaLabel="Hero" class="flex min-h-svh-90 flex-col pt-14 pb-8 sm:pt-20">
       <Hero />
       <ScrollIcon
+        aria-hidden="true"
         class:list={[
           "mt-auto",
           "size-6",
@@ -28,11 +29,11 @@ import GetCopyword from "@svelte/GetCopyword.svelte";
       />
     </Box>
 
-    <Box id="project" class="mt-10">
+    <Box id="project" ariaLabel="Proyectos" class="mt-10">
       <List />
     </Box>
 
-    <Box id="contact" class="mt-16 mb-12 sm:mt-20 sm:mb-16 md:mt-24 md:mb-20">
+    <Box id="contact" ariaLabel="Contacto" class="mt-16 mb-12 sm:mt-20 sm:mb-16 md:mt-24 md:mb-20">
       <div class="mx-auto flex flex-col items-center justify-center gap-6 sm:gap-8 md:gap-10">
         <GetCopyword text="este.mendxz@gmail.com" client:visible />
         <SocialLink />

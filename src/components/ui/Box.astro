@@ -2,17 +2,19 @@
 interface Props {
   class?: string;
   id: string;
+  ariaLabel: string;
 }
 
-const { class: className, id } = Astro.props;
+const { class: className, id, ariaLabel } = Astro.props;
 ---
 
 <section
   id={id}
   data-section={id}
+  aria-label={ariaLabel}
   class:list={[
-    "section",
     className,
+    "section",
     "scroll-m-20",
     "mx-auto",
     "w-full",

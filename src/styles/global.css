@@ -27,6 +27,7 @@
   --color-alpha-100: oklch(0.8853 0 0);
   --color-emphasis: oklch(0.4215 0.1649 307.56);
   --color-success: oklch(0.4907 0.1461 145.93);
+  --color-scotiabank: oklch(0.6171 0.2241 29.46);
   --color-steel-purple: oklch(0.4926 0.1177 321.28);
   --color-yellow: oklch(0.8928 0.1831 96.54);
 
@@ -49,6 +50,7 @@
   --color-alpha-100: var(--color-alpha-100);
   --color-emphasis: var(--color-emphasis);
   --color-success: var(--color-success);
+  --color-scotiabank: var(--color-scotiabank);
   --color-steel-purple: var(--color-steel-purple);
   --color-yellow: var(--color-yellow);
 
